@@ -1,0 +1,115 @@
+---
+title: '"LDA"'
+author: "Harpreet Kour"
+date: "June 17, 2017"
+output: html_document
+---
+
+### Libraries for Analysis
+```{r}
+#install.packages('quanteda')
+#install.packages('Matrix')
+#install.packages('topicmodels')
+install.packages('ldatuning')
+library('quanteda')
+library('Matrix')
+library('topicmodels')
+library('ldatuning')
+```
+
+
+### Load data
+
+Create a dataframe with the following columns: 
+ document id, title, text, label (this is what Dr. Aslan coded)
+```{r}
+
+#dst=csv.load(..)
+dst<-read.csv("C:/Users/Harpreet Kour/Desktop/JEmail.csv")
+#dst <- read.csv(file.choose() , header=T)
+View(dst)
+names(dst)
+df <- dst[c(1:4,7)]
+View(df)
+sum(is.na(df))
+```
+
+#Removing Whitespaces
+```{r}
+df<-df[df$Relevant!="",]
+
+#renaming col names
+names(df)
+names(df)[4] <- "Relevant"
+names(df)[5] <- "From_Type"
+
+```
+
+##Details about variables
+```{r}
+summary(df)
+#Converting to categorical variables
+df$ID<-as.factor(df$ID)
+df$Subject<-as.factor(df$Subject)
+df$Body<-as.character(df$Body)
+df$Relevant<-as.factor(df$Relevant)
+df$From_Type<-as.factor(df$From_Type)
+```
+
+
+### Prepare the corpus  
+```{r}
+myCorpus <- corpus(df$Body) 
+summary(myCorpus)
+docvars(myCorpus, "ID")<-df$ID
+docvars(myCorpus, "Subject")<-df$Subject
+docvars(myCorpus, "Body")<-df$Body
+docvars(myCorpus, "Label")<-df$Relevant
+docvars(myCorpus, "From")<-df$From_Type
+#... Add all the columns
+
+myDfm <- dfm(myCorpus,remove = stopwords("english"), stem = TRUE,remove_numbers=TRUE,remove_punct=TRUE)
+ 
+#remove features that are too common or too rare
+too.common=colnames(myDfm[,colSums(myDfm[])>100])
+too.few=colnames(myDfm[,colSums(myDfm[])<10])
+ 
+myDfm<-dfm_select(myDfm, c(too.common, too.few))
+#remove empty descriptions
+myDfm<-subset(myDfm,rowSums(myDfm)!=0)
+# convert it to the format of tm package so it can be run in lda.tuning package for detecting number of topics
+dtm.new<-convert(myDfm, to='tm')
+save(myDfm, file='dfmcorpus.RData')
+ 
+```
+
+### Find optimal number of topics
+```{r}
+r1= seq(from = 1 , to = 50, by = 1)
+
+topic.no.allDocs <- FindTopicsNumber(
+  dtm.new,
+  topics = r1,
+  metrics = c("Griffiths2004", "CaoJuan2009", "Arun2010", "Deveaud2014"),
+  method = "Gibbs",
+  control = list(seed = 77),
+  mc.cores = 2L,
+  verbose = TRUE
+)
+
+save(topic.no.allDocs, file='_alltopics.RData')
+
+topic.no=rbind(topic.no.allDocs)
+# FindTopicsNumber_plot(topic.no)
+
+```
+
+
+
+### Run labeled lda
+
+```{r}
+#dtm.topicmodel=convert(myDfm, to='lda')
+
+
+```
