@@ -105,11 +105,65 @@ topic.no=rbind(topic.no.allDocs)
 ```
 
 
-
 ### Run labeled lda
 
 ```{r}
 #dtm.topicmodel=convert(myDfm, to='lda')
-
+data_lda <- LDA(myDfm, k=4, control = list(seed = 1234))
+data_lda
 
 ```
+
+
+```{r}
+#word-topic probabilities
+
+
+data_topics <- tidy(data_lda, matrix = "beta")
+data_topics
+
+data_top_terms <- data_topics %>%
+group_by(topic) %>%
+top_n(10, beta) %>%
+ungroup() %>%
+arrange(topic, - beta)
+
+data_top_terms %>%
+mutate(term = reorder(term, beta)) %>%
+ggplot(aes(term, beta, fill = factor(topic))) +
+geom_col(show.legend = FALSE) +
+facet_wrap(~ topic, scales = "free") +
+coord_flip()
+```
+
+
+```{r}
+library('dplyr')
+library('tidyr')
+beta_spread <- data_topics %>%
+mutate(topic = paste0("topic", topic)) %>%
+spread(topic, beta) %>%
+filter(topic1 > .001 | topic2 > .001) %>%
+mutate(log_ratio = log2(topic2 / topic1))
+
+beta_spread
+```
+
+
+
+```{r}
+#document-topic probabilities
+library('tidytext')
+data_docs <- tidy(data_lda, matrix = "gamma")
+data_docs
+
+tidy(myDfm) %>%
+filter(document == 'text6') %>%
+arrange(desc(count))
+```
+
+
+
+
+
+
