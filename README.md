@@ -10,9 +10,9 @@
 We can identify the patterns in data to show how scammers pursue their goals. And we can take preventative actions accordingly
 
 **Concerns:**
-It is still hard for computers to understand text.
 
-Text analysis is an emerging field but it still requires human intervention.
+* It is still hard for computers to understand text.
+* Text analysis is an emerging field but it still requires human intervention.
 
 **GOAL:** The goal of this project is to explore the contents of email that were sent with fraudulent intent to identify different approaches in such malicious attacks in order to help improve awareness.
 
@@ -39,7 +39,8 @@ Text analysis is an emerging field but it still requires human intervention.
 **5:** Settlement payments via international transaction amount
 
 **Content Sentiment:** Playing with the recipients’ emotions.
-Image 4
+
+![picture3](https://user-images.githubusercontent.com/29806432/38068820-2bfce152-32e1-11e8-952a-aa92fcf19cbd.png)
 
 **SUMMARY:**
 
