@@ -18,7 +18,7 @@ Text analysis is an emerging field but it still requires human intervention.
 
 **WORDS AND PHRASES:**
 
-Image 1
+![80word_cloud](https://user-images.githubusercontent.com/29806432/38068706-844009f8-32e0-11e8-92ea-ad34980286ab.jpeg)
 
 ![picture1](https://user-images.githubusercontent.com/29806432/38068666-69fc74f0-32e0-11e8-8e7d-ca480b4e7d22.jpg)
 
