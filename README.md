@@ -17,8 +17,10 @@ Text analysis is an emerging field but it still requires human intervention.
 **GOAL:** The goal of this project is to explore the contents of email that were sent with fraudulent intent to identify different approaches in such malicious attacks in order to help improve awareness.
 
 **WORDS AND PHRASES:**
+
 Image 1
-Image 2
+
+![picture1](https://user-images.githubusercontent.com/29806432/38068666-69fc74f0-32e0-11e8-8e7d-ca480b4e7d22.jpg)
 
 **Content Topics:**
 Image 3
