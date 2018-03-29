@@ -23,6 +23,7 @@ Text analysis is an emerging field but it still requires human intervention.
 ![picture1](https://user-images.githubusercontent.com/29806432/38068666-69fc74f0-32e0-11e8-8e7d-ca480b4e7d22.jpg)
 
 **Content Topics:**
+
 ![picture2](https://user-images.githubusercontent.com/29806432/38068757-d84b70f0-32e0-11e8-80c4-ff85fc97bc66.jpg)
 
 **5 topics emerged :**
