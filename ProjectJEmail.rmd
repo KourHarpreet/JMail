@@ -21,7 +21,7 @@ library('ldatuning')
 ### Load data
 
 Create a dataframe with the following columns: 
- document id, title, text, label (this is what Dr. Aslan coded)
+ document id, title, text, label 
 ```{r}
 
 #dst=csv.load(..)
